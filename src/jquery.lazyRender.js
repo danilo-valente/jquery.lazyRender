@@ -1,5 +1,6 @@
 (function (window, document, $) {
     var LAZY_SRC = 'lazy-src';
+    var LAZY_SRC_RENDERED = 'lazy-src-rendered';
     var LAZY_CLASS = 'lazy-class';
 
     var PRELOAD_IMAGE = 'preload-image';
@@ -62,9 +63,9 @@
         var $this = $(this);
         var deferred = $.Deferred();
 
-        $this.attr('src', $this.data('lazy-src'))
+        $this.attr('src', $this.data(LAZY_SRC))
             .on('load', function () {
-                $this.attr('data-lazy-src-rendered', '');
+                $this.attr('data-' + LAZY_SRC_RENDERED, '');
                 deferred.resolve(true, $this);
             })
             .on('error', function () {
