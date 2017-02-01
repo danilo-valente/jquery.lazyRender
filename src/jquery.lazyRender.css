@@ -1,4 +1,5 @@
-img[data-lazy-src]:not([data-lazy-src-rendered]) {
+img[data-lazy-src]:not([data-lazy-src-rendered]),
+img[data-lazy-srcset]:not([data-lazy-src-rendered]) {
     background-color: #F0F0F0 !important;
     text-indent: -9999px !important;
 }

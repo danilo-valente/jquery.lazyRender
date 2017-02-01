@@ -1,5 +1,6 @@
 (function (window, document, $) {
     var LAZY_SRC = 'lazy-src';
+    var LAZY_SRCSET = 'lazy-srcset';
     var LAZY_SRC_RENDERED = 'lazy-src-rendered';
     var LAZY_CLASS = 'lazy-class';
 
@@ -8,6 +9,12 @@
     var PRELOAD_MAX = 'preload-max';
 
     var WIDTH = $(window).width();
+
+    // Track whether window has loaded
+    var windowLoaded = false;
+    $(window).on('load', function () {
+        windowLoaded = true;
+    });
 
     $.fn.lazyRender = function (fn) {
         switch (fn) {
@@ -30,9 +37,13 @@
     };
 
     function schedule($elem) {
-        $(window).on('load', function () {
+        if (windowLoaded) {
             render($elem);
-        });
+        } else {
+            $(window).on('load', function () {
+                render($elem);
+            });
+        }
 
         return $elem;
     }
@@ -50,7 +61,7 @@
     }
 
     function renderImages($elem) {
-        var $targets = $elem.find('img[data-' + LAZY_SRC + ']').sort(function (a, b) {
+        var $targets = $elem.find('img[data-' + LAZY_SRC + '], img[data-' + LAZY_SRCSET + ']').sort(function (a, b) {
             return $(a).offset().top - $(b).offset().top;
         });
 
@@ -64,6 +75,7 @@
         var deferred = $.Deferred();
 
         $this.attr('src', $this.data(LAZY_SRC))
+            .attr('srcset', $this.data(LAZY_SRCSET))
             .on('load', function () {
                 $this.attr('data-' + LAZY_SRC_RENDERED, '');
                 deferred.resolve(true, $this);
