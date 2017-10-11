@@ -71,5 +71,5 @@ $('#myButton'.on('click', function () {
 
 <script type="text/javascript">
 $(document).lazyRender();
-<script>
+</script>
 ```
