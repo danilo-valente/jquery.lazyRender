@@ -12,8 +12,8 @@ bower install jquery.lazyRender
 First, include these two lines of code in your HTML:
 
 ```html
-<script type="text/javascript" src="bower_components/jquery.lazyRender/dist/jquery.lazyRender.js"></script>
-<link rel="stylesheet" href="bower_components/jquery.lazyRender/dist/jquery.lazyRender.css" />
+<script type="text/javascript" src="bower_components/jquery.lazyRender/dist/jquery.lazyRender.min.js"></script>
+<link rel="stylesheet" href="bower_components/jquery.lazyRender/dist/jquery.lazyRender.min.css" />
 ```
 
 Then, define your images in your code using the most appropriate approach:
